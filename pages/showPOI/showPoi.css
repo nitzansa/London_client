@@ -1,0 +1,12 @@
+.title{
+    font: bold 12px/30px Georgia, serif;
+	font-size: 130%;
+	text-decoration: none;
+    color: rgba(9, 41, 90, 0.904);
+    padding: 0;
+}
+
+.title:hover{
+    font-size: 140%;
+	color: rgba(201, 19, 19, 0.904);
+}

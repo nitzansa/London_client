@@ -1,0 +1,112 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+#poiImg{
+    /* display: inline-block; */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+    left: 0;
+    bottom: 0;
+    width: 55%;
+    height: 25%;
+    text-align: center;
+}
+
+#img{
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+}
+
+/* #category{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 250%;
+	text-decoration: none;
+	color: rgb(9, 88, 65);
+	text-align: center;
+	border-right: 1px solid lightseagreen;
+} */
+h2
+{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 200%;
+	color: rgb(255, 255, 255);
+    text-align: center;
+	background: rgb(14, 3, 77);
+	
+}
+
+#name{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 120%;
+	color: rgb(165, 8, 8);
+}
+
+
+.line{
+  font: bold 30px/30px Georgia, serif;
+	font-size: 200%;
+	color: rgb(255, 255, 255);
+    text-align: center;
+	background: rgb(14, 3, 77);
+}
+
+.buttons{
+  width: 150px;
+  display: inline-block;
+  font: bold 100% Georgia, serif;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  color: rgba(250, 249, 249, 0.904);
+  background-color: rgb(30, 39, 85);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+.buttons:hover {
+  background-color:rgba(201, 19, 19, 0.904);
+  color: rgba(250, 249, 249, 0.904);
+}

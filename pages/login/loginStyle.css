@@ -1,0 +1,64 @@
+
+.image {
+    position: absolute;
+    left: 40%;
+    top: 7%;
+    text-align: center;
+    z-index: -1;
+    padding: 8%;
+}
+
+#bg{
+    height: 40%;
+    width: 70%;
+    z-index: -1;
+    border: 2px solid rgb(207, 20, 20);
+    border-width: 80%;
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+}
+
+.title{
+    font: bold 12px/30px Georgia, serif;
+	font-size: 130%;
+	text-decoration: none;
+    color: rgba(9, 41, 90, 0.904);
+    padding: 2%;
+}
+
+.title:hover{
+    font-size: 140%;
+	color: rgba(201, 19, 19, 0.904);
+}
+
+.buttons{
+    width: 150px;
+    display: inline-block;
+    font: bold 100% Georgia, serif;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    color: rgba(250, 249, 249, 0.904);
+    background-color: rgb(30, 39, 85);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+}
+.buttons:hover {
+    background-color:rgba(201, 19, 19, 0.904);
+    color: rgba(250, 249, 249, 0.904);
+}
+
+.firstTitle{
+    font: bold 12px/30px Georgia, serif;
+	font-size: 150%;
+	text-decoration: none;
+    color: rgba(9, 41, 90, 0.904);
+    padding: 2%;
+}
+
+.firstTitle:hover{
+    font-size: 160%;
+	color: rgba(201, 19, 19, 0.904);
+}

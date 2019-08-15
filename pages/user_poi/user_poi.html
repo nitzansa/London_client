@@ -1,0 +1,102 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="pages/user_poi/poiStyle.css" />
+</head>
+<body id="bodyUPOI">
+<div>
+    <div class="favorites" style="text-align: top left">
+        <img ng-src="resources/favorite2_icon.png" ng-click='showFavorites()' width="30" height="30">
+        <b class="small" id="msg">{{ numOfFav }}</b>
+    </div>
+    <div class="split right" style="text-align: center">
+        <div class="centered">
+            <form name="recommendForm" novalidate>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <h2><b class="line">Recommends</b></h2>
+                <div id="img" ng-repeat="(id, poi) in poisRec">
+                    <b  class="small" ng-bind="poi.name"></b>
+                    <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[poi.name]" ng-hide="star[poi.name]" ng-click="addToFavorits(poi.name)" width="20" height="20">
+                    <img ng-src="resources/favorites-star-2.png" ng-model="star[poi.name]" ng-show="star[poi.name]" ng-click="deleteFromFavorits(poi.name)" width="20" height="20">
+                    <br>
+                    <img id="poiImg" ng-src="{{ poi.image }}"  ng-controller="displayPOIController as displayPOICtrl" ng-click="openInNewWindow(poi.name)"  width="130" height="130">
+                    <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(poi.name)">Post Review</button> 
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="split left" style="text-align: center">
+        <div class="centered">
+            <form name="lastForm" novalidate>
+                <br/>
+                <br/>
+                <h2><b class="line" >Last Saved</b></h2>
+                <!-- <div id="msg" ng-bind="message"> -->
+                <b class="small" id="msg">{{ message1 }}</b>
+                <br/>
+                <b class="small" id="msg">{{ message2 }}</b>
+                <br/>
+                <b class="small" id="msg">{{ message3 }}</b>
+                <!-- </div> -->
+                <div id="img" ng-repeat="(id, poi) in pois">
+                    <b class="small"  ng-bind="poi.name"></b>
+                    <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[poi.name]" ng-hide="star[poi.name]" ng-click="addToFavorits(poi.name)" width="20" height="20">
+                    <img ng-src="resources/favorites-star-2.png" ng-model="star[poi.name]" ng-show="star[poi.name]" ng-click="deleteFromFavorits(poi.name)" width="20" height="20">
+                    <br>
+                    <img id="poiImg" ng-src="{{ poi.image }}"  ng-controller="displayPOIController as displayPOICtrl" ng-click="openInNewWindow(poi.name)"  width="130" height="130">
+                    <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(poi.name)">Post Review</button> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>New Review</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form name="requiredForm" role="form">
+                        <h3>{{poiNameForReview}}</h3>
+                        <div class="form-group">
+                            <label for="usrname" ng-model="uname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                            <input type="text" name="uname" class="form-control" id="usrname" value="{{uname}}" placeholder="Enter usrname" required>
+                            <!-- <span ng-show="requiredForm.uname.$error.required">This is a required field </span> -->
+                        </div>
+                            <div class="form-group">
+                            <label for="review"><span class="glyphicon glyphicon-pencil"></span> Content</label>
+                            <br/>
+                            <!-- <input type="text" class="form-control" id="review" placeholder="Enter your review"> -->
+                            <textarea name="message" ng-model="content" rows="7" cols="50"></textarea>
+                        </div>
+                        <fieldset class="rating" >
+                            <input ng-model="rating" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            <input ng-model="rating" type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                            <input ng-model="rating" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input ng-model="rating" type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                            <input ng-model="rating" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            <input ng-model="rating" type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                            <input ng-model="rating" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input ng-model="rating" type="radio" id="star1half" name="rating" value="1.5f" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                            <input ng-model="rating" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                            <input ng-model="rating" type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                        </fieldset>
+                        <button ng-disabled="requiredForm.$invalid" type="submit" class="btn btn-success btn-block" ng-click="postReview(poiNameForReview)" id="postBtn"><span class="glyphicon glyphicon-send"></span> Post</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+</body>

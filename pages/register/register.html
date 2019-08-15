@@ -1,0 +1,106 @@
+
+
+<head>
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="pages/register/registerStyle.css" />
+</head>
+<br/>
+<br/>
+<br/>
+<h2 class="firstTitle">Register</h2>
+
+
+<div id="mainDiv" ng-controller="registerController as registerCtrl">
+    <div class="image">
+            <img id="bg" src="resources/londom.jpg">
+    </div>
+    
+    <form name="registerForm" ng-submit="register()" novalidate>
+       <b class="line"> First Name</b>
+        <input type="text" name="fname" ng-model="fname" required >
+        <span class="line" ng-show="registerForm.fname.$error.required">This is a required field </span>
+        <br/>
+        <br/>
+        <b class="line">Last Name</b>
+        <input type="text" name="lname" ng-model="lname" required >
+        <span class="line" ng-show="registerForm.lname.$error.required">This is a required field </span>
+        <br/>
+        <br/>
+        <b class="line">City</b>
+        <input type="text" name="city" ng-model="city" required >
+        <span class="line" ng-show="registerForm.city.$error.required">This is a required field </span>
+        <br/>
+        <br/>
+        <b class="line">Country</b>
+        <select id="country" ng-model="country" required>
+        <option value="Australia">Australia</option>
+        <option value="Bolivia">Bolivia</option>
+        <option value="China">China</option>
+        <option value="Denemark">Denemark</option>
+        <option value="Israel">Israel</option>
+        <option value="Latvia">Latvia</option>
+        <option value="Monaco">Monaco</option>
+        <option value="August">August</option>
+        <option value="Norway">Norway</option>
+        <option value="Panama">Panama</option>
+        <option value="Switzerland">Switzerland</option>
+        <option value="USA" selected>USA</option></select>
+        <br/>
+        <br/>
+        <b class="line">Email</b>
+        <input type="email" name="email" ng-model="email" required >
+        <span class="line" ng-show="registerForm.email.$error.required">This is a required field </span>
+        <br/>
+        <br/>
+        <b class="line">Preffered Categories</b>
+        <select multiple id="prefferdCategories" ng-model="categories" required>
+        <option value="shopping centers">shopping centers</option>
+        <option value="architectural buildings">architectural buildings</option>
+        <option value="observation towers">observation towers</option>
+        <option value="food" selected>food</option></select>
+        <br/>
+        <br/>
+        <b class="line">PR Question one</b>
+        <select id="prQuestions1" ng-model="prq1" required >
+            <option value="what is your mothers name">what is your mothers name</option>
+            <option value="what is your pet name">what is your pet name</option>
+            <option value="where you born">where you born</option>
+            <option value="what is the name of your school">what is the name of your school</option>
+        </select>
+    
+        <input type="text" name="answer1" ng-model="pra1" required>
+        <span class="line" ng-show="registerForm.answer1.$error.required">This is a required field </span>
+        <br/>
+        <br/>
+        <b class="line">PR Question two</b>
+        <select id="prQuestions2" ng-model="prq2" required>
+            <option value="what is your mothers name">what is your mothers name</option>
+            <option value="what is your pet name">what is your pet name</option>
+            <option value="where you born">where you born</option>
+            <option value="what is the name of your school">what is the name of your school</option>
+        </select>
+        <input type="text" name="answer2" ng-model="pra2" required>
+        <span class="line" ng-show="registerForm.answer2.$error.required">This is a required field </span>
+        <br/>
+        <br/>
+        <b class="line">User Name</b>
+        <input type="text" name="uname" ng-model="uname" required ng-minlength="3" ng-maxlength="8" ng-pattern="/^[a-zA-Z\s]*$/" >
+        <span class="line" ng-show="registerForm.uname.$error.required">This is a required field </span>
+        <span class="line" ng-show="registerForm.uname.$error.minlength">Minimum length is 3 </span>
+        <span class="line" ng-show="registerForm.uname.$error.maxlength">Maximum length is 8 </span>
+        <span class="line" ng-show="registerForm.uname.$error.pattern">user name can contain only letters </span>
+        <br/>
+        <br/>
+        <b class="line">Password</b>
+        <input type="password" name="password" ng-model="password" required ng-minlength="5" ng-maxlength="10" ng-pattern="/^([a-zA-Z\s]+[0-9]+)*$/" >
+        <span class="line" ng-show="registerForm.password.$error.required">This is a required field </span>
+        <span class="line" ng-show="registerForm.password.$error.minlength">Minimum length is 5 </span>
+        <span class="line" ng-show="registerForm.password.$error.maxlength">Maximum length is 10 </span>
+        <span class="line" ng-show="registerForm.password.$error.pattern">password can must contain only letters and numbers </span>
+        <br/>
+        <br/>
+        <br/>
+        <input class="buttons" ng-disabled="registerForm.$invalid" type="submit" id="submit" value="Register">
+    </form>
+</div>
+

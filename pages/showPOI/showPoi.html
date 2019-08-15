@@ -1,0 +1,36 @@
+<head>
+        <link rel="stylesheet" type="text/css" href="pages/showPOI/showPoi.css"/>
+    </head>
+
+    <div style="text-align: center">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h2><b><p class="title" ng-model="poiName">{{poiName}}</p></b></h2>
+        <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[poiName]" ng-hide="star[poiName]" ng-click="addToFavorits(poiName)" width="30" height="30">
+        <img ng-src="resources/favorites-star-2.png" ng-model="star[poiName]" ng-show="star[poiName]" ng-click="deleteFromFavorits(poiName)" width="30" height="30">
+        <br/>
+        <br/>
+        <div id="details">
+            <img ng-src="{{ image }}" width="200" height="200">
+            
+            <div style="height:25%; width:25%; text-align: center" id="myMap" class="maps" ng-init="showMap()"></div>
+            <br/>
+            <p class="title" ng-model="views">&emsp;<span class="glyphicon glyphicon-eye-open"></span>{{views}}</p>
+            <b class="title">Description: </b>
+            <br/>
+            <p class="title" ng-model="description">{{description}}</p>
+            <br>
+            <p class="title" ng-model="rating">&emsp;{{rating}}%<span class="glyphicon glyphicon-star"></span></p>
+            <b class="title">Last Reviews: </b>
+            <br/>
+            <p class="title" ng-model="review1">{{review1}}</p>
+            <p class="title" ng-model="review2">{{review2}}</p>
+        </div>
+    </div>
+</div>

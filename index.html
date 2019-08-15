@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>My Website</title>
+            <link rel="stylesheet" type="text/css" href="style.css" />
+          </head>
+    <body ng-app="myApp">
+        <!-- load angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
+        <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
+    
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin="">
+        </script>
+        <!-- load app -->
+        <script src="app.js"></script>
+        <script src="service.js"></script>
+
+        <!-- load controllers -->
+        <script src="pages/about/aboutController.js"></script>
+        <script src="pages/user_poi/userPOIController.js"></script>
+        <script src="pages/login/loginController.js"></script>
+        <script src="pages/register/registerController.js"></script>
+        <script src="pages/poi/poiController.js"></script>
+        <script src="pages/favorites/favoritesController.js"></script>
+        <script src="pages/showPOI/displayPOIController.js"></script>
+        <!-- the website -->
+        <!-- <h1>My Website</h1> -->
+        <p id=hello ng-controller="loginController as loginController" ng-model="name"> Hello {{name}}</p>
+
+        <div class="image" ng-model="hidePhoto" ng-hide="hidePhoto">
+            <img id="bg" src="resources/londom.jpg">
+        </div>
+        
+       
+        <!-- menu -->
+        <div id=menu>
+            <a class="menuLine" href="#!" ng-click="hide3Img=false; hidePhoto=false">Home</a>&emsp;&emsp;
+            <a class="menuLine" href="#!poi" ng-click="hide3Img=true; hidePhoto=true">General POI</a>&emsp;&emsp;
+            <a class="menuLine" href="#!user_poi" ng-click="hide3Img=true ; hidePhoto=true">My POI</a>&emsp;&emsp;
+            <a class="menuLine" href="#!about" ng-click="hide3Img=true; hidePhoto=true">About</a>
+        </div>
+        <br/>
+        <br/>
+        <button class="buttons" ng-controller="loginController as loginController" ng-model="logout" ng-click="logoutfunc()" ng-hide="logout">Logout</button>
+        <br/>
+        <br/>
+        <button class="buttons" OnClick="location.href='#!login'" ng-model="login" ng-show="login">Login</button>
+        <br/>
+        <br/>
+        <button class="buttons" OnClick="location.href='#!register'" ng-model="hideRegister" ng-controller="loginController as loginController" ng-show="hideRegister">Register</button>
+        <div ng-view></div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div id="footer" ng-controller="myCtrl as myCtrl" ng-model="hide3Img" ng-hide="hide3Img"> 
+            <div id="img_footer" ng-repeat="(id, poi) in pois">
+                <b class="titel"><span ng-bind="poi.name"></span></b>
+                <br/>
+                <img class="photo" ng-src="{{ poi.image }}" ng-controller="displayPOIController as displayPOICtrl" ng-click="openInNewWindow(poi.name)" width="60" height="60">
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+
+<head>
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="pages/login/loginStyle.css" />
+</head>
+<br/>
+<br/>
+<br/>
+<h2 class="firstTitle">Login</h2>
+
+
+<div ng-controller="loginController as loginCtrl">
+    <form name="loginForm" novalidate>
+        <div id="entry" ng-init="entry=false" ng-model="forget" ng-hide="forget">
+            <b class="title">User Name</b>
+            <input type="text" name="uname" ng-model="uname"  required >
+            <span  class="title" ng-show="loginForm.uname.$error.required">This is a required field </span>
+            <br/>
+              
+            <b  class="title">Password</b>
+            <input type="password" name="password" ng-model="password" required >
+            <span class="title"ng-show="loginForm.password.$error.required">This is a required field </span>
+            <br/>
+            <br/>
+            <button class="buttons" ng-disabled="loginForm.$invalid" ng-click="login()" >login</button>
+            <br/>
+            <br/>
+            <button class="buttons" ng-init="forget=false" ng-click="check(uname)" ng-hide="forget">forget password</button> 
+        </div>
+    </form>
+  
+    <form name="restorePasswordForm" novalidate>
+            <div id="restore" ng-init="forget=false" ng-show="forget">
+                <b class="title">Question</b>
+                <select ng-model="selected" ng-options="y.q for (x, y) in questions">
+                    </select>
+                <br/>
+                <br/>
+                <b class="title">Answer</b>
+                <input type="text" name="answerForQuestion" ng-model="answer" required >
+                <span class="title" ng-show="restorePasswordForm.answer.$error.required">This is a required field </span>
+                <br/>
+                <br/>
+                <button class="buttons" ng-init="restore=false" ng-click="restorePass()" ng-hide="restore">Restore</button> 
+            </div>
+        </form>
+</div>

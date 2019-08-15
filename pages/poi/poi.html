@@ -1,0 +1,141 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="pages/poi/poi.css" />
+</head>
+
+<body id="bodyPOI">
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding:35px 50px;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>New Review</h4>
+                    </div>
+                    <div class="modal-body" style="padding:40px 50px;">
+                        <form name="requiredForm" role="form">
+                            <h3>{{poiNameForReview}}</h3>
+                            <div class="form-group">
+                                <label for="usrname" ng-model="uname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                <input type="text" name="uname" class="form-control" id="usrname" value="{{uname}}" placeholder="Enter usrname" required>
+                                <!-- <span ng-show="requiredForm.uname.$error.required">This is a required field </span> -->
+                            </div>
+                                <div class="form-group">
+                                <label for="review"><span class="glyphicon glyphicon-pencil"></span> Content</label>
+                                <br/>
+                                <!-- <input type="text" class="form-control" id="review" placeholder="Enter your review"> -->
+                                <textarea name="message" ng-model="content" rows="7" cols="50"></textarea>
+                            </div>
+                            <fieldset class="rating" >
+                                <input ng-model="rating" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                <input ng-model="rating" type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                <input ng-model="rating" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                <input ng-model="rating" type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                <input ng-model="rating" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                <input ng-model="rating" type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                <input ng-model="rating" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                <input ng-model="rating" type="radio" id="star1half" name="rating" value="1.5f" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                <input ng-model="rating" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                <input ng-model="rating" type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                            </fieldset>
+                            <button ng-disabled="requiredForm.$invalid" type="submit" class="btn btn-success btn-block" ng-click="postReview(poiNameForReview)" id="postBtn"><span class="glyphicon glyphicon-send"></span> Post</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <br/>
+    <br/>
+    <button class="buttons" OnClick="location.href='#!user_poi'">My POI</button>
+    <div style="text-align: center" >
+        <form name="searcForm" novalidate>
+            <div name="searcForm" ng-submit="search()" value="Search" name="Search" novalidate>
+                <input type="text" name="poiname" ng-model="poiname" required >
+                <span ng-show="searcForm.poiname.$error.required"></span>
+                <input class="buttons" ng-click="search()" ng-disabled="searcForm.$invalid" type="submit" id="submit" value="Search">
+            </div>
+        </form>
+        <form name="filterForm" novalidate>
+            <b ng-hide="select">Choose category:</b>
+            <select id="categories" ng-model="categories" required>
+                <option value="shopping centers">shopping centers</option>
+                <option value="architectural buildings">architectural buildings</option>
+                <option value="observation towers">observation towers</option>
+                <option value="food" selected>food</option>
+            </select>
+            <input class="buttons" ng-disabled="filterForm.$invalid" type="submit" id="submit" value="Filter" ng-click="filter()" ng-model="checked">
+            <br/>
+            <br/>
+            <button class="buttons" name="sortForm" ng-click="sort()">Sort By Rating</button>
+            <h2><b>{{categories}}</b></h2>
+            <br/>
+            <div id="img" ng-repeat="(id, pois) in pois">
+                <b><span id=name ng-bind="pois.name"></span></b>&emsp;&emsp;
+                <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[pois.name]" ng-hide="star[pois.name]" ng-click="addToFavorits(pois.name)" width="20" height="20">
+                <img ng-src="resources/favorites-star-2.png" ng-model="star[pois.name]" ng-show="star[pois.name]" ng-click="deleteFromFavorits(pois.name)" width="20" height="20">
+                <br>
+                <img id="poiImg" ng-src="{{ pois.image }}" ng-controller="displayPOIController as displayPOICtrl" ng-click="openInNewWindow(pois.name)" width="165" height="165">
+                <br/>
+                <br/>
+                <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(pois.name)">Post Review</button> 
+            </div>
+        </form>
+    </div>
+    <form name="allPOIForm" ng-hide="onFilter" ng-show="onPOIButton" novalidate>
+        <h2><b>Food</b></h2>
+        <br/>
+        <div id="img" ng-repeat="(id, food) in food">
+            <b><span id=name ng-bind="food.name"></span></b>
+            <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[food.name]" ng-hide="star[food.name]" ng-click="addToFavorits(food.name)" width="20" height="20">
+            <img ng-src="resources/favorites-star-2.png" ng-model="star[food.name]" ng-show="star[food.name]" ng-click="deleteFromFavorits(food.name)" width="20" height="20">
+            <br>
+            <img id="poiImg" ng-src="{{ food.image }}" ng-controller="displayPOIController as displayPOICtrl"  ng-click="openInNewWindow(food.name)" width="165" height="165">
+            <br/>
+            <br/>
+            <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(food.name)">Post Review</button> 
+        </div>
+        <br/>
+        <h2><b>Shopping Centers</b></h2>
+        <br/>
+        <div id="img" ng-repeat="(id, shopping_centers) in shopping_centers">
+            <b><span id=name ng-bind="shopping_centers.name"></span></b>
+            <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[shopping_centers.name]" ng-hide="star[shopping_centers.name]" ng-click="addToFavorits(shopping_centers.name)" width="20" height="20">
+            <img ng-src="resources/favorites-star-2.png" ng-model="star[shopping_centers.name]" ng-show="star[shopping_centers.name]" ng-click="deleteFromFavorits(shopping_centers.name)" width="20" height="20">
+            <br>
+            <img id="poiImg" ng-src="{{ shopping_centers.image }}" ng-controller="displayPOIController as displayPOICtrl"  ng-click="openInNewWindow(shopping_centers.name)" width="165" height="165">
+            <br/>
+            <br/>
+            <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(shopping_centers.name)">Post Review</button> 
+        </div>
+        <br/>
+        <h2><b>Observation Towers</b></h2>
+        <br/>
+        <div id="img" ng-repeat="(id, observation) in observation_towers">
+            <b><span id=name ng-bind="observation.name"></span></b>
+            <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[observation.name]" ng-hide="star[observation.name]" ng-click="addToFavorits(observation.name)" width="20" height="20">
+            <img ng-src="resources/favorites-star-2.png" ng-model="star[observation.name]" ng-show="star[observation.name]" ng-click="deleteFromFavorits(observation.name)" width="20" height="20">
+            <br>
+            <img id="poiImg" ng-src="{{ observation.image }}" ng-controller="displayPOIController as displayPOICtrl"  ng-click="openInNewWindow(observation.name)" width="165" height="165">
+            <br/>
+            <br/>
+            <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(observation.name)">Post Review</button> 
+        </div>
+        <br/>
+        <h2><b>Architectural Buildings</b></h2>
+        <br/>
+        <div id="img" ng-repeat="(id, architectural) in architectural_buildings">
+            <b><span id=name ng-bind="architectural.name"></span></b>
+            <img ng-src="resources/aa21eb60437133bf4f4be189636a187a-star-favorite-outline-icon-by-vexels.png" ng-model="star[architectural.name]" ng-hide="star[architectural.name]" ng-click="addToFavorits(architectural.name)" width="20" height="20">
+            <img ng-src="resources/favorites-star-2.png" ng-model="star[architectural.name]" ng-show="star[architectural.name]" ng-click="deleteFromFavorits(architectural.name)" width="20" height="20">
+            <br>
+            <img id="poiImg" ng-src="{{ architectural.image }}" ng-controller="displayPOIController as displayPOICtrl"  ng-click="openInNewWindow(architectural.name)" width="165" height="165">
+            <br/>
+            <br/>
+            <button class="buttons" type="button" data-toggle="model" data-target="#myModal" ng-click="showModal(architectural.name)">Post Review</button> 
+        </div>
+    </form> 
+</body>

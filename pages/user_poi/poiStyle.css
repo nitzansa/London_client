@@ -1,0 +1,148 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+
+/* .split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+  
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.favorites{
+    position: fixed;
+    z-index: 1;
+}
+  
+  /* .centered img {
+  } */ 
+
+#poiImg{
+    /* display: inline-block; */
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+    left: 0;
+    bottom: 0;
+    width: 55%;
+    height: 25%;
+    text-align: center;
+}
+
+#img{
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+}
+h2
+{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 200%;
+	color: rgb(255, 255, 255);
+    text-align: center;
+	background: rgb(14, 3, 77);
+	
+}
+
+#choose{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 130%;
+	color: rgb(14, 3, 77);
+}
+
+.line{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 120%;
+	color: rgba(250, 249, 249, 0.904);
+}
+
+
+.buttons{
+    width: 150px;
+    display: inline-block;
+    font: bold 125% Georgia, serif;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    color: rgba(250, 249, 249, 0.904);
+    background-color: rgb(30, 39, 85);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+}
+.buttons:hover {
+    background-color:rgba(201, 19, 19, 0.904);
+    color: rgba(250, 249, 249, 0.904);
+}
+
+.small{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 120%;
+	color: rgb(14, 3, 77);
+}
+
+.small:hover{
+    font: bold 30px/30px Georgia, serif;
+	font-size: 140%;
+	color: rgba(201, 19, 19, 0.904);
+}
